@@ -1,29 +1,29 @@
 import { createFaultyTerminal } from './faultyTerminal.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Initialize React Bits FaultyTerminal WebGL Shader Component
+  // 1. Initialize React Bits FaultyTerminal WebGL Shader Component in Background
   const terminalContainer = document.getElementById('terminal-canvas-container');
   let terminalShader = null;
 
   if (terminalContainer) {
     terminalShader = createFaultyTerminal(terminalContainer, {
-      scale: 1.3,
+      scale: 1.35,
       gridMul: [2, 1],
       digitSize: 1.2,
-      timeScale: 0.75,
+      timeScale: 0.7,
       pause: false,
-      scanlineIntensity: 0.5,
-      glitchAmount: 0.35,
-      flickerAmount: 0.45,
-      noiseAmp: 0.7,
-      chromaticAberration: 0.6,
+      scanlineIntensity: 0.45,
+      glitchAmount: 0.3,
+      flickerAmount: 0.4,
+      noiseAmp: 0.65,
+      chromaticAberration: 0.5,
       dither: 0.08,
-      curvature: 0.03,
-      tint: '#00ffcc',
+      curvature: 0.02,
+      tint: '#dbf530',
       mouseReact: true,
-      mouseStrength: 0.4,
+      mouseStrength: 0.35,
       pageLoadAnimation: true,
-      brightness: 0.65
+      brightness: 0.55
     });
   }
 
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     port: '8080',
     totalPackets: 0,
     droppedPackets: 0,
-    packetRate: 46
+    packetRate: 48
   };
 
   const profiles = {
@@ -48,11 +48,12 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // DOM Elements
-  const profileButtons = document.querySelectorAll('.preset-btn');
+  const presetButtons = document.querySelectorAll('.scanner-preset-btn');
   const latencySlider = document.getElementById('latency-slider');
   const dropSlider = document.getElementById('drop-slider');
   const jitterSlider = document.getElementById('jitter-slider');
   const portSelect = document.getElementById('port-select');
+  const currTargetPort = document.getElementById('curr-target-port');
 
   const latencyVal = document.getElementById('latency-val');
   const dropVal = document.getElementById('drop-val');
@@ -65,8 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const logContainer = document.getElementById('packet-terminal-log');
   const dynamicCliCmd = document.getElementById('dynamic-cli-cmd');
   const copyCliBtn = document.getElementById('copy-cli-btn');
-  const quickInstallBtn = document.getElementById('quick-install-btn');
-  const quickCopyText = document.getElementById('quick-copy-text');
+  const quickCopyInstall = document.getElementById('quick-copy-install');
+  const quickCopyBadge = document.getElementById('quick-copy-badge');
 
   function updateDynamicCommand() {
     let cmd = `subway-sim start`;
@@ -74,8 +75,12 @@ document.addEventListener('DOMContentLoaded', () => {
       cmd += ` --port ${state.port}`;
     }
     cmd += ` --latency ${state.latency} --drop ${state.dropRate} --jitter ${state.jitter}`;
+    
     if (dynamicCliCmd) {
       dynamicCliCmd.textContent = cmd;
+    }
+    if (currTargetPort) {
+      currTargetPort.textContent = state.port === 'all' ? 'ALL PORTS' : `PORT ${state.port}`;
     }
   }
 
@@ -92,9 +97,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Profile Button Click Handlers
-  profileButtons.forEach(btn => {
+  presetButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      profileButtons.forEach(b => b.classList.remove('active'));
+      presetButtons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
       const pKey = btn.getAttribute('data-preset');
@@ -113,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
     latencySlider.addEventListener('input', (e) => {
       state.latency = parseInt(e.target.value, 10);
       if (latencyVal) latencyVal.textContent = `${state.latency} ms`;
-      profileButtons.forEach(b => b.classList.remove('active'));
+      presetButtons.forEach(b => b.classList.remove('active'));
       updateDynamicCommand();
     });
   }
@@ -122,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     dropSlider.addEventListener('input', (e) => {
       state.dropRate = parseInt(e.target.value, 10);
       if (dropVal) dropVal.textContent = `${state.dropRate} %`;
-      profileButtons.forEach(b => b.classList.remove('active'));
+      presetButtons.forEach(b => b.classList.remove('active'));
       updateDynamicCommand();
     });
   }
@@ -131,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     jitterSlider.addEventListener('input', (e) => {
       state.jitter = parseInt(e.target.value, 10);
       if (jitterVal) jitterVal.textContent = `±${state.jitter} ms`;
-      profileButtons.forEach(b => b.classList.remove('active'));
+      presetButtons.forEach(b => b.classList.remove('active'));
       updateDynamicCommand();
     });
   }
@@ -149,8 +154,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const textToCopy = dynamicCliCmd.textContent.trim();
       navigator.clipboard.writeText(textToCopy).then(() => {
         copyCliBtn.textContent = 'Copied!';
-        copyCliBtn.style.color = '#00ffcc';
-        copyCliBtn.style.borderColor = '#00ffcc';
+        copyCliBtn.style.color = '#dbf530';
+        copyCliBtn.style.borderColor = '#dbf530';
         setTimeout(() => {
           copyCliBtn.textContent = 'Copy';
           copyCliBtn.style.color = '';
@@ -160,22 +165,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  if (quickInstallBtn) {
-    quickInstallBtn.addEventListener('click', () => {
+  if (quickCopyInstall) {
+    quickCopyInstall.addEventListener('click', () => {
       navigator.clipboard.writeText('cargo install subway-sim').then(() => {
-        if (quickCopyText) {
-          quickCopyText.textContent = 'COPIED!';
-          quickCopyText.style.color = '#00ffcc';
+        if (quickCopyBadge) {
+          quickCopyBadge.textContent = 'COPIED!';
+          quickCopyBadge.style.color = '#dbf530';
           setTimeout(() => {
-            quickCopyText.textContent = 'COPY';
-            quickCopyText.style.color = '';
+            quickCopyBadge.textContent = 'COPY';
+            quickCopyBadge.style.color = '';
           }, 1800);
         }
       });
     });
   }
 
-  // 3. Live Animated Packet Waterfall Simulator
+  // 3. Live Animated Packet Waterfall Stream
   const protocols = [
     { name: 'TCP', port: 8080, type: 'SYN', size: 64 },
     { name: 'TCP', port: 8080, type: 'ACK', size: 52 },
@@ -222,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Build log element
     const row = document.createElement('div');
-    row.className = 'log-entry';
+    row.className = 'log-row';
 
     const tsSpan = document.createElement('span');
     tsSpan.className = 'log-ts';
@@ -238,14 +243,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const statusSpan = document.createElement('span');
     if (isDropped) {
-      statusSpan.className = 'log-status-dropped';
-      statusSpan.textContent = '✕ DROPPED (KERNEL_DROP)';
+      statusSpan.className = 'log-dropped';
+      statusSpan.textContent = '✕ DROPPED (KERNEL)';
     } else if (state.latency > 0) {
-      statusSpan.className = 'log-status-delayed';
+      statusSpan.className = 'log-delayed';
       statusSpan.textContent = `⏳ DELAYED +${effectiveRtt}ms`;
     } else {
-      statusSpan.className = 'log-status-pass';
-      statusSpan.textContent = `✓ FORWARDED (0ms)`;
+      statusSpan.className = 'log-pass';
+      statusSpan.textContent = `✓ FORWARDED`;
     }
 
     row.appendChild(tsSpan);
@@ -255,17 +260,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (logContainer) {
       logContainer.appendChild(row);
-      // Keep only last 10 entries for ultra smooth performance
       while (logContainer.children.length > 9) {
         logContainer.removeChild(logContainer.firstChild);
       }
     }
 
-    // Schedule next packet with variable timing
     const nextInterval = Math.max(120, Math.floor(1000 / state.packetRate + (Math.random() * 80 - 40)));
     setTimeout(emitPacket, nextInterval);
   }
 
   // Kickoff simulation loop
-  setTimeout(emitPacket, 400);
+  setTimeout(emitPacket, 350);
 });
