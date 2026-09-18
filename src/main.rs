@@ -262,7 +262,7 @@ fn ui(f: &mut ratatui::Frame, state: &AppState, ports: &[u16]) {
         .split(f.size());
 
     let header = Paragraph::new(format!(
-        " 🚇 SUBWAY-SIM | Profile: {} | Latency: {}ms | Drop: {}% ",
+        " [SIM] SUBWAY-SIM | Profile: {} | Latency: {}ms | Drop: {}% ",
         state.profile_name, state.latency, state.drop_rate
     ))
     .style(Style::default().fg(Color::Yellow).add_modifier(Modifier::BOLD))
