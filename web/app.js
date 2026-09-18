@@ -218,13 +218,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const statusSpan = document.createElement('span');
     if (isDropped) {
       statusSpan.className = 'log-dropped';
-      statusSpan.textContent = '✕ DROPPED (KERNEL)';
+      statusSpan.textContent = ' DROPPED (KERNEL)';
     } else if (state.latency > 0) {
       statusSpan.className = 'log-delayed';
-      statusSpan.textContent = `⏳ DELAYED +${effectiveRtt}ms`;
+      statusSpan.textContent = ` DELAYED +${effectiveRtt}ms`;
     } else {
       statusSpan.className = 'log-pass';
-      statusSpan.textContent = `✓ FORWARDED`;
+      statusSpan.textContent = ` FORWARDED`;
     }
 
     row.appendChild(tsSpan);

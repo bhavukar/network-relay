@@ -12,7 +12,7 @@ async function download() {
     if (!fs.existsSync(binDir)) fs.mkdirSync(binDir);
     const dest = path.join(binDir, targetName);
 
-    console.log(`🚀 Downloading ${binaryName} for ${os.platform()}...`);
+    console.log(` Downloading ${binaryName} for ${os.platform()}...`);
     const response = await axios({ url, method: 'GET', responseType: 'stream' });
     const writer = fs.createWriteStream(dest);
 
@@ -21,7 +21,7 @@ async function download() {
     return new Promise((resolve, reject) => {
         writer.on('finish', () => {
             fs.chmodSync(dest, 0o755); // Make it executable
-            console.log('✅ Done! Run subway-sim start');
+            console.log(' Done! Run subway-sim start');
             resolve();
         });
         writer.on('error', reject);
@@ -29,6 +29,6 @@ async function download() {
 }
 
 download().catch(err => {
-    console.error('❌ Download failed:', err.message);
+    console.error(' Download failed:', err.message);
     process.exit(1);
 });

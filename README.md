@@ -1,4 +1,4 @@
-# 🚇 Network Relay (Subway-Sim)
+#  Network Relay (Subway-Sim)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
 [![Rust](https://img.shields.io/badge/Rust-1.75+-orange.svg)](https://www.rust-lang.org/)
@@ -11,7 +11,7 @@ Built with **Rust**, **Tokio**, and **WinDivert**, `network-relay` intercepts lo
 
 ---
 
-## ✨ Features
+##  Features
 
 - **Real-time Interception**: Uses WinDivert to capture and manipulate packets at the kernel level.
 - **Predefined Profiles**: Quickly switch between common "bad network" scenarios:
@@ -26,7 +26,7 @@ Built with **Rust**, **Tokio**, and **WinDivert**, `network-relay` intercepts lo
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -63,7 +63,7 @@ Run the simulator with a specific profile (must be run as Administrator):
 
 ---
 
-## 🛠️ Technical Stack
+##  Technical Stack
 
 - **[WinDivert](https://reqrypt.org/windivert.html)**: Kernel-level packet interception.
 - **[Ratatui](https://ratatui.rs/)**: Terminal UI for live monitoring.
@@ -72,7 +72,7 @@ Run the simulator with a specific profile (must be run as Administrator):
 
 ---
 
-## ⚖️ License
+##  License
 
 MIT © [Bhavuk Arora](https://github.com/bhavukar)
 
