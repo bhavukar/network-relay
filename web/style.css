@@ -1,24 +1,26 @@
 :root {
-  --color-bg: #09090c;
-  --color-bg-subtle: #0d0d12;
-  --color-surface: #111117;
-  --color-surface-hover: #16161f;
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-subtle: rgba(255, 255, 255, 0.04);
-  --color-border-hover: rgba(255, 255, 255, 0.18);
+  --color-bg: #ffffff;
+  --color-bg-subtle: #f8f9fa;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f4f4f5;
+  --color-border: #e4e4e7;
+  --color-border-subtle: #f0f0f3;
+  --color-border-hover: #d4d4d8;
   
-  --color-text: #f4f4f7;
-  --color-text-muted: #888899;
-  --color-text-faint: #4e4e5e;
+  --color-text: #09090b;
+  --color-text-muted: #52525b;
+  --color-text-faint: #71717a;
 
-  /* Infisical Signature Highlight Colors */
+  /* Infisical Signature Highlighter Colors */
   --color-volt: #dbf530;
-  --color-volt-ink: #0a0a0c;
-  --color-cyan: #00ffcc;
+  --color-volt-border: #c4e022;
+  --color-volt-ink: #09090b;
+  
+  --color-cyan: #0284c7;
   --color-emerald: #10b981;
-  --color-red: #ff4757;
+  --color-red: #ef4444;
   --color-yellow: #f59e0b;
-  --color-blue: #3b82f6;
+  --color-blue: #2563eb;
 
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
@@ -37,7 +39,7 @@ html {
   background-color: var(--color-bg);
 }
 
-body.inf-body {
+body.inf-body.light-theme {
   background-color: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-sans);
@@ -50,31 +52,10 @@ body.inf-body {
 .font-sans { font-family: var(--font-sans); }
 .font-mono { font-family: var(--font-mono); }
 
-.text-volt { color: var(--color-volt); }
-.text-cyan { color: var(--color-cyan); }
-.text-green { color: var(--color-emerald); }
+.text-accent { color: #09090b; }
+.text-green { color: #059669; }
 .text-red { color: var(--color-red); }
-.text-yellow { color: var(--color-yellow); }
-
-/* Ambient Background Shader */
-.inf-bg-shader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.45;
-}
-
-.inf-grain-overlay {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(circle at 50% 20%, rgba(219, 245, 48, 0.03) 0%, transparent 60%);
-  z-index: 1;
-}
+.text-yellow { color: #d97706; }
 
 /* =========================================
    Infisical Architectural Framed Container
@@ -87,6 +68,7 @@ body.inf-body {
   min-height: 100vh;
   border-left: 1px solid var(--color-border);
   border-right: 1px solid var(--color-border);
+  background-color: var(--color-bg);
   display: flex;
   flex-direction: column;
 }
@@ -99,7 +81,7 @@ body.inf-body {
   top: 0;
   z-index: 100;
   height: 56px;
-  background: rgba(9, 9, 12, 0.85);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--color-border);
@@ -128,9 +110,10 @@ body.inf-body {
 }
 
 .inf-logo-text {
-  font-size: 0.92rem;
-  font-weight: 600;
+  font-size: 0.94rem;
+  font-weight: 700;
   letter-spacing: -0.02em;
+  color: var(--color-text);
 }
 
 .inf-nav-links {
@@ -144,9 +127,10 @@ body.inf-body {
 }
 
 .inf-nav-item {
-  font-size: 0.84rem;
+  font-size: 0.85rem;
   color: var(--color-text-muted);
   text-decoration: none;
+  font-weight: 500;
   transition: color 0.15s ease;
 }
 
@@ -164,23 +148,25 @@ body.inf-body {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 5px 10px;
-  background: rgba(255, 255, 255, 0.04);
+  padding: 5px 11px;
+  background: #ffffff;
   border: 1px solid var(--color-border);
   border-radius: 6px;
   color: var(--color-text);
-  font-size: 0.76rem;
+  font-size: 0.78rem;
   text-decoration: none;
-  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: all 0.18s ease;
 }
 
 .inf-github-pill:hover {
-  background: rgba(255, 255, 255, 0.08);
   border-color: var(--color-border-hover);
+  background: #f4f4f5;
 }
 
 .stars-count {
   color: var(--color-text-muted);
+  font-weight: 500;
 }
 
 /* Infisical Buttons */
@@ -199,49 +185,53 @@ body.inf-body {
 }
 
 .inf-btn-primary {
-  background: #ffffff;
-  color: #000000;
-  border: 1px solid #ffffff;
+  background: #09090b;
+  color: #ffffff;
+  border: 1px solid #09090b;
   font-weight: 600;
 }
 
 .inf-btn-primary:hover {
-  background: #e5e5eb;
-  border-color: #e5e5eb;
+  background: #27272a;
+  border-color: #27272a;
+  transform: translateY(-1px);
 }
 
 .inf-btn-secondary {
-  background: rgba(255, 255, 255, 0.04);
+  background: #ffffff;
   color: var(--color-text);
   border: 1px solid var(--color-border);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 .inf-btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: #f4f4f5;
   border-color: var(--color-border-hover);
 }
 
 .prompt {
-  color: var(--color-volt);
+  color: #71717a;
+  font-weight: 600;
 }
 
 .copy-badge {
   font-size: 0.65rem;
-  background: rgba(255, 255, 255, 0.08);
+  background: #e4e4e7;
   padding: 1px 5px;
   border-radius: 3px;
-  color: var(--color-text-muted);
+  color: #52525b;
+  font-weight: 600;
 }
 
 /* =========================================
    Infisical Hero Section
    ========================================= */
 .inf-hero {
-  padding: 64px 36px 48px 36px;
+  padding: 68px 36px 52px 36px;
   border-bottom: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 36px;
 }
 
 .inf-eyebrow {
@@ -249,33 +239,34 @@ body.inf-body {
   align-items: center;
   gap: 8px;
   font-size: 0.72rem;
-  color: var(--color-text-muted);
+  color: var(--color-text-faint);
   letter-spacing: 0.06em;
-  margin-bottom: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
 }
 
 .eyebrow-accent {
-  width: 2px;
+  width: 3px;
   height: 12px;
-  background-color: var(--color-volt);
+  background-color: var(--color-volt-ink);
   display: inline-block;
 }
 
 .inf-headline {
-  font-size: clamp(2.4rem, 5.2vw, 4.1rem);
-  font-weight: 400;
+  font-size: clamp(2.4rem, 5.2vw, 4.2rem);
+  font-weight: 500;
   letter-spacing: -0.035em;
   line-height: 1.06;
-  color: #ffffff;
-  max-width: 960px;
+  color: #09090b;
+  max-width: 980px;
 }
 
 /* The Signature Infisical Volt Highlighter Tag */
 .inf-highlight {
   position: relative;
   display: inline-block;
-  padding: 0 0.16em;
-  margin: 0 0.03em;
+  padding: 0 0.18em;
+  margin: 0 0.04em;
   color: var(--color-volt-ink);
   white-space: nowrap;
   letter-spacing: -0.03em;
@@ -287,7 +278,7 @@ body.inf-body {
   inset: 0;
   background: var(--color-volt);
   z-index: 0;
-  border-radius: 2px;
+  border-radius: 3px;
 }
 
 .inf-highlight-text {
@@ -340,11 +331,11 @@ body.inf-body {
 }
 
 .inf-scanner-window {
-  background: var(--color-bg-subtle);
+  background: #ffffff;
   border: 1px solid var(--color-border);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+  box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .scanner-bar {
@@ -352,9 +343,9 @@ body.inf-body {
   align-items: center;
   justify-content: space-between;
   padding: 10px 18px;
-  background: rgba(0, 0, 0, 0.4);
+  background: #f8f9fa;
   border-bottom: 1px solid var(--color-border);
-  font-size: 0.75rem;
+  font-size: 0.76rem;
 }
 
 .scanner-brand {
@@ -367,8 +358,8 @@ body.inf-body {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background-color: var(--color-emerald);
-  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+  background-color: #10b981;
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.4);
   animation: pulse-dot-anim 2s infinite ease-in-out;
 }
 
@@ -378,8 +369,8 @@ body.inf-body {
 }
 
 .scanner-title {
-  color: var(--color-text);
-  font-weight: 500;
+  color: #09090b;
+  font-weight: 600;
 }
 
 .scanner-meta {
@@ -394,16 +385,16 @@ body.inf-body {
 }
 
 .meta-divider {
-  color: var(--color-text-faint);
+  color: #d4d4d8;
 }
 
 .scanner-pill-live {
   font-size: 0.68rem;
-  color: var(--color-volt);
-  background: rgba(219, 245, 48, 0.1);
+  color: #09090b;
+  background: var(--color-volt);
+  font-weight: 600;
   padding: 2px 8px;
   border-radius: 4px;
-  border: 1px solid rgba(219, 245, 48, 0.2);
 }
 
 /* Scanner Preset Buttons */
@@ -412,7 +403,7 @@ body.inf-body {
   align-items: center;
   gap: 12px;
   padding: 10px 18px;
-  background: rgba(255, 255, 255, 0.02);
+  background: #fcfcfd;
   border-bottom: 1px solid var(--color-border);
   overflow-x: auto;
 }
@@ -421,6 +412,7 @@ body.inf-body {
   font-size: 0.7rem;
   color: var(--color-text-faint);
   letter-spacing: 0.05em;
+  font-weight: 600;
   white-space: nowrap;
 }
 
@@ -431,7 +423,7 @@ body.inf-body {
 }
 
 .scanner-preset-btn {
-  background: rgba(255, 255, 255, 0.04);
+  background: #ffffff;
   border: 1px solid var(--color-border);
   color: var(--color-text-muted);
   font-family: var(--font-mono);
@@ -440,24 +432,26 @@ body.inf-body {
   border-radius: 6px;
   cursor: pointer;
   white-space: nowrap;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
   transition: all 0.16s ease;
 }
 
 .scanner-preset-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--color-text);
+  background: #f4f4f5;
+  color: #09090b;
 }
 
 .scanner-preset-btn.active {
-  background: rgba(219, 245, 48, 0.12);
-  border-color: var(--color-volt);
-  color: var(--color-volt);
+  background: var(--color-volt);
+  border-color: var(--color-volt-border);
+  color: #09090b;
+  font-weight: 600;
 }
 
 /* Scanner Grid (2 Columns) */
 .scanner-grid {
   display: grid;
-  grid-template-columns: 1.25fr 0.75fr;
+  grid-template-columns: 1.22fr 0.78fr;
   min-height: 400px;
 }
 
@@ -471,7 +465,7 @@ body.inf-body {
   border-right: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
-  background: rgba(0, 0, 0, 0.3);
+  background: #ffffff;
 }
 
 @media (max-width: 880px) {
@@ -486,7 +480,7 @@ body.inf-body {
   grid-template-columns: repeat(4, 1fr);
   gap: 8px;
   padding: 12px 18px;
-  background: rgba(0, 0, 0, 0.4);
+  background: #f8f9fa;
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -497,27 +491,34 @@ body.inf-body {
 }
 
 .telem-lbl {
-  font-size: 0.64rem;
+  font-size: 0.65rem;
   color: var(--color-text-faint);
   letter-spacing: 0.04em;
+  font-weight: 600;
 }
 
 .telem-val {
-  font-size: 0.86rem;
-  font-weight: 600;
-  color: var(--color-text);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #09090b;
 }
 
+/* High-Contrast Embedded Terminal Pane */
 .scanner-log {
   flex: 1;
-  padding: 14px 18px;
-  height: 310px;
+  margin: 14px 18px;
+  padding: 14px;
+  height: 290px;
   overflow-y: hidden;
   font-size: 0.74rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: 4px;
+  gap: 5px;
+  background: #0f1015;
+  border: 1px solid #1f212d;
+  border-radius: 8px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .log-row {
@@ -533,33 +534,33 @@ body.inf-body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.log-ts { color: var(--color-text-faint); }
-.log-proto { color: var(--color-blue); font-weight: 600; }
-.log-msg { color: var(--color-text-muted); }
+.log-ts { color: #525260; }
+.log-proto { color: #38bdf8; font-weight: 600; }
+.log-msg { color: #a1a1aa; }
 .log-delayed {
-  color: var(--color-yellow);
-  background: rgba(245, 158, 11, 0.1);
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.15);
   padding: 1px 6px;
   border-radius: 3px;
 }
 .log-dropped {
-  color: var(--color-red);
-  background: rgba(255, 71, 87, 0.12);
+  color: #f87171;
+  background: rgba(239, 68, 68, 0.18);
   padding: 1px 6px;
   border-radius: 3px;
 }
 .log-pass {
-  color: var(--color-emerald);
+  color: #34d399;
 }
 
 /* Controls Column */
 .scanner-controls-col {
-  padding: 18px 22px;
+  padding: 20px 22px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 16px;
-  background: rgba(17, 17, 23, 0.5);
+  background: #fafafa;
 }
 
 .slider-block {
@@ -576,13 +577,15 @@ body.inf-body {
 
 .slider-lbl {
   font-size: 0.68rem;
-  color: var(--color-text-muted);
+  color: var(--color-text-faint);
   letter-spacing: 0.05em;
+  font-weight: 600;
 }
 
 .slider-val {
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #09090b;
 }
 
 .inf-range {
@@ -591,7 +594,7 @@ body.inf-body {
   width: 100%;
   height: 4px;
   border-radius: 2px;
-  background: rgba(255, 255, 255, 0.1);
+  background: #e4e4e7;
   outline: none;
   cursor: pointer;
 }
@@ -602,39 +605,41 @@ body.inf-body {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: var(--color-text);
+  background: #09090b;
   cursor: pointer;
-  border: 2px solid var(--color-bg);
-  box-shadow: 0 0 8px rgba(219, 245, 48, 0.5);
+  border: 2px solid #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   transition: transform 0.1s ease;
 }
 
 .inf-range::-webkit-slider-thumb:hover {
   transform: scale(1.2);
-  background: var(--color-volt);
+  background: #000000;
 }
 
 .inf-select {
   width: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: #ffffff;
   border: 1px solid var(--color-border);
   border-radius: 6px;
   padding: 7px 10px;
   color: var(--color-text);
-  font-size: 0.76rem;
+  font-size: 0.78rem;
+  font-weight: 500;
   outline: none;
   cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 
 .inf-select:focus {
-  border-color: var(--color-volt);
+  border-color: #09090b;
 }
 
 .scanner-command-box {
-  background: rgba(0, 0, 0, 0.6);
-  border: 1px solid var(--color-border);
+  background: #0f1015;
+  border: 1px solid #1f212d;
   border-radius: 8px;
-  padding: 10px 12px;
+  padding: 11px 13px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -647,15 +652,16 @@ body.inf-body {
 }
 
 .cmd-tag {
-  font-size: 0.64rem;
-  color: var(--color-text-faint);
+  font-size: 0.65rem;
+  color: #71717a;
   letter-spacing: 0.05em;
+  font-weight: 600;
 }
 
 .cmd-copy-btn {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--color-border);
-  color: var(--color-text-muted);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e4e4e7;
   font-family: var(--font-mono);
   font-size: 0.68rem;
   padding: 2px 8px;
@@ -665,23 +671,24 @@ body.inf-body {
 }
 
 .cmd-copy-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  color: var(--color-text);
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
 }
 
 .cmd-text {
-  font-size: 0.74rem;
+  font-size: 0.76rem;
   color: var(--color-volt);
   word-break: break-all;
   line-height: 1.4;
   user-select: all;
+  font-weight: 500;
 }
 
 /* =========================================
    Infisical Architectural 3-Column Section
    ========================================= */
 .inf-section {
-  padding: 64px 36px;
+  padding: 68px 36px;
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -691,9 +698,9 @@ body.inf-body {
 
 .inf-section-title {
   font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.03em;
-  color: #ffffff;
+  color: #09090b;
   line-height: 1.15;
 }
 
@@ -701,9 +708,10 @@ body.inf-body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   border: 1px solid var(--color-border);
-  background: var(--color-bg-subtle);
+  background: #ffffff;
   border-radius: 10px;
   overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 @media (max-width: 860px) {
@@ -713,7 +721,7 @@ body.inf-body {
 }
 
 .inf-grid-col {
-  padding: 32px 28px;
+  padding: 34px 30px;
   border-right: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
@@ -745,17 +753,18 @@ body.inf-body {
   font-size: 0.7rem;
   color: var(--color-text-faint);
   letter-spacing: 0.05em;
+  font-weight: 600;
 }
 
 .col-headline {
-  font-size: 1.22rem;
-  font-weight: 500;
+  font-size: 1.25rem;
+  font-weight: 600;
   letter-spacing: -0.02em;
-  color: #ffffff;
+  color: #09090b;
 }
 
 .col-desc {
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   color: var(--color-text-muted);
   line-height: 1.6;
 }
@@ -764,63 +773,66 @@ body.inf-body {
    Infisical Code Quickstart Frame
    ========================================= */
 .inf-code-frame {
-  background: var(--color-bg-subtle);
-  border: 1px solid var(--color-border);
+  background: #0f1015;
+  border: 1px solid #1f212d;
   border-radius: 10px;
   overflow: hidden;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
 }
 
 .code-frame-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 16px;
-  background: rgba(0, 0, 0, 0.4);
-  border-bottom: 1px solid var(--color-border);
+  padding: 10px 18px;
+  background: #14161f;
+  border-bottom: 1px solid #1f212d;
   font-size: 0.72rem;
 }
 
 .code-frame-title {
-  color: var(--color-text-muted);
+  color: #71717a;
   letter-spacing: 0.05em;
+  font-weight: 600;
 }
 
 .code-copy-btn {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--color-border);
-  color: var(--color-text-muted);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e4e4e7;
   font-family: var(--font-mono);
   font-size: 0.7rem;
-  padding: 3px 8px;
+  padding: 3px 9px;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
 .code-copy-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  color: var(--color-text);
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
 }
 
 .code-frame-body {
-  padding: 20px;
-  font-size: 0.84rem;
+  padding: 22px;
+  font-size: 0.85rem;
   line-height: 1.7;
+  color: #f4f4f7;
 }
 
-.tok-comment { color: var(--color-text-faint); }
-.tok-cmd { color: var(--color-volt); }
+.tok-comment { color: #525260; }
+.tok-cmd { color: var(--color-volt); font-weight: 600; }
 
 /* =========================================
    Infisical Split CTA Banner
    ========================================= */
 .inf-cta-section {
-  padding: 64px 36px;
+  padding: 68px 36px;
   border-bottom: 1px solid var(--color-border);
 }
 
 .inf-cta-box {
-  background: var(--color-bg-subtle);
+  background: #f8f9fa;
   border: 1px solid var(--color-border);
   border-radius: 12px;
   padding: 44px 36px;
@@ -840,15 +852,15 @@ body.inf-body {
 
 .cta-title {
   font-size: clamp(1.5rem, 3vw, 2.1rem);
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: -0.025em;
-  color: #ffffff;
+  color: #09090b;
   line-height: 1.2;
   margin-bottom: 10px;
 }
 
 .cta-desc {
-  font-size: 0.92rem;
+  font-size: 0.94rem;
   color: var(--color-text-muted);
   line-height: 1.6;
 }
@@ -869,7 +881,8 @@ body.inf-body {
    Infisical Footer
    ========================================= */
 .inf-footer {
-  padding: 28px 36px;
+  padding: 32px 36px;
+  background: #ffffff;
 }
 
 .footer-inner {
@@ -886,7 +899,8 @@ body.inf-body {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--color-text-muted);
+  color: #09090b;
+  font-weight: 600;
 }
 
 .footer-logo {
@@ -895,12 +909,13 @@ body.inf-body {
 }
 
 .footer-legal a {
-  color: var(--color-text-muted);
+  color: #09090b;
   text-decoration: none;
+  font-weight: 500;
 }
 
 .footer-legal a:hover {
-  color: var(--color-volt);
+  text-decoration: underline;
 }
 
 .footer-links {
@@ -912,13 +927,14 @@ body.inf-body {
 .footer-links a {
   color: var(--color-text-muted);
   text-decoration: none;
+  font-weight: 500;
   transition: color 0.15s ease;
 }
 
 .footer-links a:hover {
-  color: var(--color-volt);
+  color: #09090b;
 }
 
 .footer-links .sep {
-  color: var(--color-text-faint);
+  color: #d4d4d8;
 }

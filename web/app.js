@@ -1,33 +1,5 @@
-import { createFaultyTerminal } from './faultyTerminal.js';
-
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Initialize React Bits FaultyTerminal WebGL Shader Component in Background
-  const terminalContainer = document.getElementById('terminal-canvas-container');
-  let terminalShader = null;
-
-  if (terminalContainer) {
-    terminalShader = createFaultyTerminal(terminalContainer, {
-      scale: 1.35,
-      gridMul: [2, 1],
-      digitSize: 1.2,
-      timeScale: 0.7,
-      pause: false,
-      scanlineIntensity: 0.45,
-      glitchAmount: 0.3,
-      flickerAmount: 0.4,
-      noiseAmp: 0.65,
-      chromaticAberration: 0.5,
-      dither: 0.08,
-      curvature: 0.02,
-      tint: '#dbf530',
-      mouseReact: true,
-      mouseStrength: 0.35,
-      pageLoadAnimation: true,
-      brightness: 0.55
-    });
-  }
-
-  // 2. Interactive Network Chaos State
+  // 1. Interactive Network Chaos State
   const state = {
     profile: 'subway',
     latency: 800,
@@ -170,17 +142,19 @@ document.addEventListener('DOMContentLoaded', () => {
       navigator.clipboard.writeText('cargo install subway-sim').then(() => {
         if (quickCopyBadge) {
           quickCopyBadge.textContent = 'COPIED!';
-          quickCopyBadge.style.color = '#dbf530';
+          quickCopyBadge.style.color = '#09090b';
+          quickCopyBadge.style.backgroundColor = '#dbf530';
           setTimeout(() => {
             quickCopyBadge.textContent = 'COPY';
             quickCopyBadge.style.color = '';
+            quickCopyBadge.style.backgroundColor = '';
           }, 1800);
         }
       });
     });
   }
 
-  // 3. Live Animated Packet Waterfall Stream
+  // 2. Live Animated Packet Waterfall Stream
   const protocols = [
     { name: 'TCP', port: 8080, type: 'SYN', size: 64 },
     { name: 'TCP', port: 8080, type: 'ACK', size: 52 },

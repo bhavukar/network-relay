@@ -14,7 +14,7 @@
   <link rel="canonical" href="https://network-relay.vercel.app/">
 
   <!-- Favicons -->
-  <meta name="theme-color" content="#0a0a0c">
+  <meta name="theme-color" content="#ffffff">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -53,23 +53,17 @@
   <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="inf-body">
-
-  <!-- Ambient WebGL FaultyTerminal Background Canvas -->
-  <div id="terminal-canvas-container" class="inf-bg-shader"></div>
-  
-  <!-- Subtle Grain & Grid Overlay -->
-  <div class="inf-grain-overlay"></div>
+<body class="inf-body light-theme">
 
   <!-- Main Container Framed by Infisical Structural Vertical Hairlines -->
   <div class="inf-container">
     <div class="inf-vertical-line left"></div>
     <div class="inf-vertical-line right"></div>
 
-    <!-- Infisical-Style Fixed Top Navigation -->
+    <!-- Infisical-Style Top Navigation -->
     <header class="inf-nav">
       <div class="inf-nav-inner">
         <a href="#" class="inf-logo">
@@ -154,7 +148,7 @@
             <div class="scanner-meta font-mono">
               <span class="meta-tag">TARGET: <strong id="curr-target-port">PORT 8080</strong></span>
               <span class="meta-divider">|</span>
-              <span class="meta-tag">KERNEL OVERHEAD: <strong class="text-volt">&lt; 0.12 μs</strong></span>
+              <span class="meta-tag">KERNEL OVERHEAD: <strong class="text-accent">&lt; 0.12 μs</strong></span>
               <span class="meta-divider">|</span>
               <span class="meta-tag">STATUS: <strong class="text-green">ACTIVE</strong></span>
             </div>
@@ -186,7 +180,7 @@
               <div class="scanner-telemetry font-mono">
                 <div class="telem-cell">
                   <span class="telem-lbl">SIMULATED RTT</span>
-                  <span class="telem-val text-volt" id="stat-rtt">842 ms</span>
+                  <span class="telem-val" id="stat-rtt">842 ms</span>
                 </div>
                 <div class="telem-cell">
                   <span class="telem-lbl">PACKET LOSS</span>
@@ -214,7 +208,7 @@
               <div class="slider-block">
                 <div class="slider-row-top">
                   <span class="slider-lbl">ARTIFICIAL LATENCY</span>
-                  <span id="latency-val" class="slider-val text-volt">800 ms</span>
+                  <span id="latency-val" class="slider-val">800 ms</span>
                 </div>
                 <input type="range" id="latency-slider" min="0" max="4000" step="50" value="800" class="inf-range">
               </div>
@@ -283,7 +277,7 @@
         
         <!-- Column 1 -->
         <div class="inf-grid-col">
-          <div class="col-accent-bar" style="background-color: var(--color-volt);"></div>
+          <div class="col-accent-bar" style="background-color: var(--color-volt-border);"></div>
           <div class="col-eyebrow font-mono">01 // KERNEL DRIVER</div>
           <h3 class="col-headline font-sans">
             <span class="inf-inline-highlight">WinDivert Interception</span>
@@ -295,7 +289,7 @@
 
         <!-- Column 2 -->
         <div class="inf-grid-col">
-          <div class="col-accent-bar" style="background-color: var(--color-cyan);"></div>
+          <div class="col-accent-bar" style="background-color: var(--color-blue);"></div>
           <div class="col-eyebrow font-mono">02 // ASYNC EVENT LOOP</div>
           <h3 class="col-headline font-sans">
             <span class="inf-inline-highlight">Tokio Delay Queues</span>
