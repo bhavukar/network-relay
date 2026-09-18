@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <!-- Primary SEO Meta Tags -->
-  <title>Network Relay (Subway-Sim) — High-Performance Kernel Network Simulator</title>
-  <meta name="title" content="Network Relay (Subway-Sim) — High-Performance Kernel Network Simulator">
+  <title>Network Relay (Subway-Sim) — Kernel Network Chaos Simulator</title>
+  <meta name="title" content="Network Relay (Subway-Sim) — Kernel Network Chaos Simulator">
   <meta name="description" content="A high-performance kernel-level network chaos simulator built with Rust, Tokio, and WinDivert. Intercept, delay, drop, and jitter packets in real-time.">
-  <meta name="keywords" content="network simulator, network chaos engineering, packet loss simulator, latency injector, Rust network tools, WinDivert, Toxiproxy alternative, Clumsy alternative, subway sim, packet delay">
+  <meta name="keywords" content="network simulator, network chaos engineering, packet loss simulator, latency injector, Rust network tools, WinDivert, subway sim">
   <meta name="author" content="Bhavuk Arora">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://network-relay.vercel.app/">
@@ -24,7 +24,7 @@
   <meta property="og:url" content="https://network-relay.vercel.app/">
   <meta property="og:site_name" content="Network Relay">
   <meta property="og:title" content="Network Relay — Simulate chaotic networks with kernel precision.">
-  <meta property="og:description" content="Kernel-level packet interception, real-time latency injection, and packet loss simulation built with Rust & Tokio. 100% Free & Open Source.">
+  <meta property="og:description" content="Kernel-level packet interception, real-time latency injection, and packet loss simulation built with Rust & Tokio.">
   <meta property="og:image" content="https://raw.githubusercontent.com/bhavukar/network-relay/master/web/assets/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -32,8 +32,8 @@
   <!-- Twitter / X -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://network-relay.vercel.app/">
-  <meta property="twitter:title" content="Network Relay — High-Performance Kernel Network Simulator">
-  <meta property="twitter:description" content="Simulate real-world bad networks with kernel-level packet interception in Rust & Tokio. Free forever under MIT license.">
+  <meta property="twitter:title" content="Network Relay — Kernel Network Chaos Simulator">
+  <meta property="twitter:description" content="Simulate real-world bad networks with kernel-level packet interception in Rust & Tokio. 100% Free & Open Source.">
   <meta property="twitter:image" content="https://raw.githubusercontent.com/bhavukar/network-relay/master/web/assets/og-image.png">
 
   <!-- Schema.org JSON-LD -->
@@ -44,15 +44,8 @@
     "name": "Network Relay (Subway-Sim)",
     "operatingSystem": "Windows 10+, Linux, macOS",
     "applicationCategory": "DeveloperApplication",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
     "license": "https://opensource.org/licenses/MIT",
     "description": "A high-performance network environment simulator built in Rust with Tokio and WinDivert for real-time packet manipulation and chaos engineering.",
-    "softwareVersion": "0.1.0",
-    "downloadUrl": "https://github.com/bhavukar/network-relay/releases",
     "url": "https://network-relay.vercel.app/"
   }
   </script>
@@ -60,438 +53,203 @@
   <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Floating Pill Navigation -->
-  <header class="navbar-wrapper">
-    <div class="navbar-pill">
-      <a href="#" class="nav-brand">
-        <img src="assets/logo.svg" alt="Network Relay Logo" class="brand-logo" />
-        <span class="brand-name">network relay</span>
-      </a>
+  <!-- WebGL FaultyTerminal Background Canvas -->
+  <div id="terminal-canvas-container" class="terminal-bg-canvas"></div>
 
-      <nav class="nav-links">
-        <a href="#simulator">Simulator</a>
-        <a href="#features">Features</a>
-        <a href="#profiles">Profiles</a>
-        <a href="#comparison">Compare</a>
-        <a href="#quickstart" class="nav-btn-solid">Get Started</a>
-        <a href="https://github.com/bhavukar/network-relay" target="_blank" class="nav-btn-outline">GitHub</a>
-      </nav>
-    </div>
-  </header>
+  <!-- Main Container -->
+  <div class="app-layout">
+    
+    <!-- Top Minimalist Bar -->
+    <header class="top-bar">
+      <div class="brand">
+        <img src="assets/logo.svg" alt="Network Relay" class="brand-icon">
+        <span class="brand-title mono">network-relay<span class="dim">//subway-sim</span></span>
+        <span class="kernel-badge mono">
+          <span class="dot pulse"></span> WinDivert 2.2 Attached
+        </span>
+      </div>
 
-  <main>
-    <!-- Hero Section with React Bits FaultyTerminal WebGL Shader -->
-    <section class="hero-showcase">
-      <div id="terminal-canvas-container" class="terminal-bg"></div>
+      <div class="top-actions">
+        <button id="quick-install-btn" class="quick-install-pill mono" title="Click to copy install command">
+          <span class="prompt">$</span>
+          <span class="cmd">cargo install subway-sim</span>
+          <span class="copy-tag" id="quick-copy-text">COPY</span>
+        </button>
+        <a href="https://github.com/bhavukar/network-relay" target="_blank" class="github-btn mono">
+          <svg height="16" width="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
+      </div>
+    </header>
 
-      <div class="hero-content">
-        <div class="hero-tag">
-          <span class="tag-badge">RUST & TOKIO</span>
-          <span>Kernel-Level Packet Interception Engine</span>
-        </div>
-
-        <h1 class="hero-heading">
-          Simulate chaotic networks<br>
-          with kernel precision.
-        </h1>
-
-        <p class="hero-description">
-          Intercept, delay, drop, and jitter local TCP/UDP packets in real-time. Test how your APIs, WebSockets, and microservices survive spotty subway tunnels, elevator dead-zones, and flaky 3G connections.
+    <!-- Hero / Pitch -->
+    <main class="main-content">
+      <div class="hero-brief">
+        <h1 class="hero-title">Simulate chaotic networks with kernel precision.</h1>
+        <p class="hero-sub">
+          Intercept, delay, drop, and jitter local TCP/UDP packets in real-time. Built with <strong>Rust</strong>, <strong>Tokio</strong> & <strong>WinDivert</strong> for zero proxy or MITM certificate overhead.
         </p>
+      </div>
 
-        <div class="hero-actions">
-          <a href="#quickstart" class="btn btn-primary">Start Simulating</a>
-          <a href="https://github.com/bhavukar/network-relay" target="_blank" class="btn btn-secondary">
-            <span>View Source Code</span>
-            <span class="btn-arrow">→</span>
-          </a>
+      <!-- Centerpiece: The Interactive Chaos Workbench -->
+      <div class="workbench">
+        
+        <!-- Workbench Header -->
+        <div class="workbench-bar">
+          <div class="wb-window-dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <div class="wb-meta mono">
+            <span class="dim">SESSION:</span> LOCAL_DEV
+            <span class="sep">|</span>
+            <span class="dim">DRIVER:</span> WINDIVERT_KERNEL
+            <span class="sep">|</span>
+            <span class="dim">OVERHEAD:</span> &lt;0.12µs
+          </div>
+          <div class="wb-status mono">
+            <span class="status-live">● INTERCEPTING</span>
+          </div>
         </div>
 
-        <!-- Interactive Live Network Simulator & Terminal Dashboard -->
-        <div id="simulator" class="terminal-mockup-wrapper">
-          <div class="terminal-window">
-            <!-- Terminal Title Bar -->
-            <div class="terminal-header">
-              <div class="window-controls">
-                <span class="ctrl ctrl-close"></span>
-                <span class="ctrl ctrl-min"></span>
-                <span class="ctrl ctrl-max"></span>
+        <!-- Profile Preset Switcher -->
+        <div class="preset-strip mono">
+          <span class="preset-label">PROFILES:</span>
+          <div class="preset-buttons">
+            <button class="preset-btn active" data-preset="subway">🚇 Subway (800ms / 10%)</button>
+            <button class="preset-btn" data-preset="elevator">🛗 Elevator (2500ms / 20%)</button>
+            <button class="preset-btn" data-preset="mountain">⛰️ Mountain (4000ms / 5%)</button>
+            <button class="preset-btn" data-preset="3g">📶 Spotty 3G (400ms / 2%)</button>
+            <button class="preset-btn" data-preset="chaos">⚡ Chaos (1500ms / 35%)</button>
+          </div>
+        </div>
+
+        <!-- Two-Column Interactive Core -->
+        <div class="workbench-body">
+          
+          <!-- Left: Live Packet Waterfall Terminal -->
+          <div class="stream-panel">
+            <div class="telemetry-bar mono">
+              <div class="metric">
+                <span class="m-lbl">SIMULATED RTT</span>
+                <span class="m-val text-cyan" id="stat-rtt">842 ms</span>
               </div>
-              <div class="terminal-title">
-                <span class="status-dot pulsing"></span>
-                <span>subway-sim v0.1.0 • WinDivert Kernel Hook (PORT 8080)</span>
+              <div class="metric">
+                <span class="m-lbl">PACKET LOSS</span>
+                <span class="m-val text-red" id="stat-dropped">10.0%</span>
               </div>
-              <div class="terminal-actions">
-                <span class="badge-pill">ACTIVE RELAY</span>
+              <div class="metric">
+                <span class="m-lbl">QUEUE DEPTH</span>
+                <span class="m-val" id="stat-queue">18 pkts</span>
+              </div>
+              <div class="metric">
+                <span class="m-lbl">RATE</span>
+                <span class="m-val text-green" id="stat-rate">46 pkts/s</span>
+              </div>
+            </div>
+
+            <!-- Terminal Stream Window -->
+            <div id="packet-terminal-log" class="packet-log mono">
+              <!-- Animated via app.js -->
+            </div>
+          </div>
+
+          <!-- Right: Control Knobs & Dynamic Command Builder -->
+          <div class="controls-panel mono">
+            
+            <div class="control-group">
+              <div class="ctrl-header">
+                <span class="ctrl-title">ARTIFICIAL LATENCY</span>
+                <span id="latency-val" class="ctrl-val text-cyan">800 ms</span>
+              </div>
+              <input type="range" id="latency-slider" min="0" max="4000" step="50" value="800" class="styled-slider" />
+            </div>
+
+            <div class="control-group">
+              <div class="ctrl-header">
+                <span class="ctrl-title">PACKET DROP RATE</span>
+                <span id="drop-val" class="ctrl-val text-red">10 %</span>
+              </div>
+              <input type="range" id="drop-slider" min="0" max="60" step="1" value="10" class="styled-slider" />
+            </div>
+
+            <div class="control-group">
+              <div class="ctrl-header">
+                <span class="ctrl-title">JITTER VARIANCE</span>
+                <span id="jitter-val" class="ctrl-val text-yellow">±120 ms</span>
+              </div>
+              <input type="range" id="jitter-slider" min="0" max="500" step="10" value="120" class="styled-slider" />
+            </div>
+
+            <div class="control-group">
+              <div class="ctrl-header">
+                <span class="ctrl-title">TARGET PORT FILTER</span>
+              </div>
+              <select id="port-select" class="styled-select mono">
+                <option value="8080">Port 8080 (Local Backend / HTTP)</option>
+                <option value="3000">Port 3000 (React / Next.js / Vite)</option>
+                <option value="5000">Port 5000 (Python / FastAPI)</option>
+                <option value="9000">Port 9000 (gRPC Microservice)</option>
+                <option value="all">All Traffic (Layer 3 & 4)</option>
+              </select>
+            </div>
+
+            <!-- Dynamic CLI Command Box -->
+            <div class="cli-output-box">
+              <div class="cli-box-header">
+                <span class="cli-tag">LIVE CLI COMMAND</span>
+                <button id="copy-cli-btn" class="cli-copy-btn">Copy</button>
+              </div>
+              <div class="cli-command-text" id="dynamic-cli-cmd">
+                subway-sim start --port 8080 --latency 800 --drop 10 --jitter 120
               </div>
             </div>
 
-            <!-- Terminal Main Grid -->
-            <div class="simulator-grid">
-              <!-- Left Column: Interactive Chaos Controls -->
-              <div class="sim-controls-pane">
-                <div class="pane-header">
-                  <span class="pane-label">CHAOS PROFILES</span>
-                </div>
-
-                <!-- Profile Pills -->
-                <div class="profile-pills">
-                  <button class="prof-pill active" data-preset="subway">🚇 Subway (800ms / 10%)</button>
-                  <button class="prof-pill" data-preset="elevator">🛗 Elevator (2500ms / 20%)</button>
-                  <button class="prof-pill" data-preset="mountain">⛰️ Mountain (4000ms / 5%)</button>
-                  <button class="prof-pill" data-preset="3g">📶 Spotty 3G (400ms / 2%)</button>
-                  <button class="prof-pill" data-preset="chaos">⚡ Full Chaos (1500ms / 35%)</button>
-                </div>
-
-                <div class="pane-divider"></div>
-
-                <!-- Sliders -->
-                <div class="slider-group">
-                  <div class="slider-label-row">
-                    <span class="slider-name">Artificial Latency</span>
-                    <span id="latency-val" class="slider-num mono">800 ms</span>
-                  </div>
-                  <input type="range" id="latency-slider" min="0" max="4000" step="50" value="800" class="sim-range" />
-                </div>
-
-                <div class="slider-group">
-                  <div class="slider-label-row">
-                    <span class="slider-name">Packet Drop Rate</span>
-                    <span id="drop-val" class="slider-num mono">10 %</span>
-                  </div>
-                  <input type="range" id="drop-slider" min="0" max="60" step="1" value="10" class="sim-range" />
-                </div>
-
-                <div class="slider-group">
-                  <div class="slider-label-row">
-                    <span class="slider-name">Jitter Variance (±)</span>
-                    <span id="jitter-val" class="slider-num mono">120 ms</span>
-                  </div>
-                  <input type="range" id="jitter-slider" min="0" max="500" step="10" value="120" class="sim-range" />
-                </div>
-
-                <div class="slider-group">
-                  <div class="slider-label-row">
-                    <span class="slider-name">Target Port</span>
-                    <span class="slider-num mono">8080 (HTTP)</span>
-                  </div>
-                  <select id="port-select" class="sim-select mono">
-                    <option value="8080">Port 8080 (Local Web Server)</option>
-                    <option value="3000">Port 3000 (React / Next.js / Vite)</option>
-                    <option value="5000">Port 5000 (Python Flask / FastAPI)</option>
-                    <option value="9000">Port 9000 (gRPC / Microservice)</option>
-                    <option value="all">All Outbound & Inbound Ports</option>
-                  </select>
-                </div>
-              </div>
-
-              <!-- Right Column: Live Packet Stream & Real-Time Terminal Log -->
-              <div class="sim-stream-pane">
-                <div class="pane-header">
-                  <span class="pane-label">LIVE PACKET INTERCEPTION STREAM</span>
-                  <span id="stream-status" class="mono text-neon">● 42 pkts/sec</span>
-                </div>
-
-                <!-- Real-time Stats Cards -->
-                <div class="sim-stats-bar">
-                  <div class="stat-cell">
-                    <span class="stat-title">SIMULATED RTT</span>
-                    <span id="stat-rtt" class="stat-value mono">842 ms</span>
-                  </div>
-                  <div class="stat-cell">
-                    <span class="stat-title">PACKETS DROPPED</span>
-                    <span id="stat-dropped" class="stat-value mono text-danger">10.2%</span>
-                  </div>
-                  <div class="stat-cell">
-                    <span class="stat-title">QUEUE DEPTH</span>
-                    <span id="stat-queue" class="stat-value mono">18 pkts</span>
-                  </div>
-                  <div class="stat-cell">
-                    <span class="stat-title">KERNEL TIME</span>
-                    <span class="stat-value mono text-neon">&lt; 0.12 μs</span>
-                  </div>
-                </div>
-
-                <!-- Live Terminal Packet Log -->
-                <div id="packet-terminal-log" class="terminal-log mono">
-                  <!-- Injected via app.js -->
-                </div>
-              </div>
-            </div>
           </div>
-          <div class="terminal-ground-shadow"></div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Clean Bento Box Architecture Grid -->
-    <section id="features" class="section">
-      <div class="section-intro">
-        <div class="section-tag">ENGINEERING ARCHITECTURE</div>
-        <h2 class="section-title">Built with Rust for zero-overhead chaos.</h2>
-        <p class="section-subtitle">Manipulate OSI Layer 3/4 packets without intermediate proxy hops or TLS certificate MITM overhead.</p>
+        </div>
+
       </div>
 
-      <div class="bento-grid">
-        <!-- Row 1: Span 2 + Span 1 -->
-        <div class="bento-card bento-span-2">
-          <div class="bento-badge">KERNEL DRIVER</div>
-          <h3 class="bento-title">WinDivert Kernel Packet Interception</h3>
-          <p class="bento-desc">Hooks directly into the Windows network stack via kernel-level WinDivert drivers. Intercepts raw IPv4/IPv6 TCP, UDP, and ICMP frames before socket buffering occurs.</p>
+      <!-- Feature Badges (Lean inline row, no bento grids) -->
+      <div class="features-strip mono">
+        <div class="feat-item">
+          <span class="feat-bullet">◈</span>
+          <span class="feat-text"><strong>Kernel Driver:</strong> WinDivert L3/L4 frame interception</span>
         </div>
-
-        <div class="bento-card">
-          <div class="bento-badge">ASYNC EVENT LOOP</div>
-          <h3 class="bento-title">Tokio Channel Queues</h3>
-          <p class="bento-desc">Zero-cost asynchronous channel buffers hold delayed packets in user space without blocking OS threads or thread pool exhaustion.</p>
+        <div class="feat-item">
+          <span class="feat-bullet">◈</span>
+          <span class="feat-text"><strong>Tokio Async:</strong> Zero-cost user-space packet delay queues</span>
         </div>
-
-        <!-- Row 2: Span 1 + Span 2 -->
-        <div class="bento-card">
-          <div class="bento-badge">TUI DASHBOARD</div>
-          <h3 class="bento-title">Ratatui Real-Time ASCII Terminal</h3>
-          <p class="bento-desc">Live terminal user interface with real-time throughput gauges, packet drop graphs, and hotkey switching right in your CLI.</p>
-        </div>
-
-        <div class="bento-card bento-span-2">
-          <div class="bento-badge">TARGETING & PID SANDBOX</div>
-          <h3 class="bento-title">Multi-Port & Process Traffic Sandboxing</h3>
-          <p class="bento-desc">Target individual development ports (e.g. 3000, 8080, 5000) or specific process IDs so you can stress test your staging app while keeping Discord, Spotify, and Slack running smoothly.</p>
-        </div>
-
-        <!-- Row 3: Span 1 + Span 1 + Span 1 -->
-        <div class="bento-card">
-          <div class="bento-badge">PROBABILISTIC LOSS</div>
-          <h3 class="bento-title">Bernoulli & Burst Loss</h3>
-          <p class="bento-desc">Simulates both independent random drop rates and realistic temporal burst packet loss modeling intermittent radio drops.</p>
-        </div>
-
-        <div class="bento-card">
-          <div class="bento-badge">STANDALONE BINARY</div>
-          <h3 class="bento-title">&lt; 5MB Native Binary</h3>
-          <p class="bento-desc">Compiled directly to optimized native machine code. Zero Node.js, Python, or JVM runtime dependencies.</p>
-        </div>
-
-        <div class="bento-card">
-          <div class="bento-badge">OPEN SOURCE</div>
-          <h3 class="bento-title">100% Free & MIT Licensed</h3>
-          <p class="bento-desc">Full open source codebase on GitHub with zero telemetry, zero analytics, and no subscription limits.</p>
+        <div class="feat-item">
+          <span class="feat-bullet">◈</span>
+          <span class="feat-text"><strong>Port Sandboxing:</strong> Stress test without lagging Discord/Slack</span>
         </div>
       </div>
-    </section>
 
-    <!-- Predefined Profiles Section -->
-    <section id="profiles" class="section">
-      <div class="section-intro">
-        <div class="section-tag">PREDEFINED PROFILES</div>
-        <h2 class="section-title">Battle-test every real-world network condition.</h2>
-        <p class="section-subtitle">Reproduce exact connection degradations with single-command profile presets.</p>
-      </div>
+    </main>
 
-      <div class="profiles-grid">
-        <div class="profile-card">
-          <div class="profile-icon">🚇</div>
-          <h3 class="profile-title">Subway</h3>
-          <div class="profile-metrics mono">
-            <span>Latency: <strong>800ms</strong></span>
-            <span>Loss: <strong>10%</strong></span>
-          </div>
-          <p class="profile-desc">Simulates riding an underground metro transit system with intermittent antenna handoffs and high latency spikes.</p>
-          <code class="profile-cmd mono">subway-sim start --profile subway</code>
-        </div>
-
-        <div class="profile-card">
-          <div class="profile-icon">🛗</div>
-          <h3 class="profile-title">Elevator</h3>
-          <div class="profile-metrics mono">
-            <span>Latency: <strong>2500ms</strong></span>
-            <span>Loss: <strong>20%</strong></span>
-          </div>
-          <p class="profile-desc">Simulates Faraday cage elevator shafts with severe packet starvation and heavy round-trip delays.</p>
-          <code class="profile-cmd mono">subway-sim start --profile elevator</code>
-        </div>
-
-        <div class="profile-card">
-          <div class="profile-icon">⛰️</div>
-          <h3 class="profile-title">Mountain</h3>
-          <div class="profile-metrics mono">
-            <span>Latency: <strong>4000ms</strong></span>
-            <span>Loss: <strong>5%</strong></span>
-          </div>
-          <p class="profile-desc">Simulates remote satellite / high-altitude links with extreme latency delays and minimal drop rates.</p>
-          <code class="profile-cmd mono">subway-sim start --profile mountain</code>
-        </div>
-
-        <div class="profile-card">
-          <div class="profile-icon">📶</div>
-          <h3 class="profile-title">Spotty 3G</h3>
-          <div class="profile-metrics mono">
-            <span>Latency: <strong>400ms</strong></span>
-            <span>Loss: <strong>2%</strong></span>
-          </div>
-          <p class="profile-desc">Simulates congested edge cellular connections with variable jitter and slow handshake ACK responses.</p>
-          <code class="profile-cmd mono">subway-sim start --profile 3g</code>
-        </div>
-      </div>
-    </section>
-
-    <!-- Comparison Table -->
-    <section id="comparison" class="section">
-      <div class="section-intro">
-        <div class="section-tag">COMPARISON</div>
-        <h2 class="section-title">Why Network Relay?</h2>
-        <p class="section-subtitle">How Network Relay / Subway-Sim stacks up against existing network testing utilities.</p>
-      </div>
-
-      <div class="table-wrapper">
-        <table class="minimal-table">
-          <thead>
-            <tr>
-              <th>Capability</th>
-              <th class="primary-col">Network Relay</th>
-              <th>Toxiproxy</th>
-              <th>Clumsy</th>
-              <th>Charles Proxy</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Kernel-Level Interception</strong></td>
-              <td class="primary-col">✅ WinDivert Direct</td>
-              <td>❌ TCP Proxy Only</td>
-              <td>✅ WinDivert</td>
-              <td>❌ HTTP/S Proxy</td>
-            </tr>
-            <tr>
-              <td><strong>Zero Configuration / Non-Invasive</strong></td>
-              <td class="primary-col">✅ No app code changes</td>
-              <td>❌ Requires proxy port routing</td>
-              <td>✅ System-wide</td>
-              <td>❌ Requires SSL cert installation</td>
-            </tr>
-            <tr>
-              <td><strong>Target Specific Local Ports</strong></td>
-              <td class="primary-col">✅ Instant port filter</td>
-              <td>✅ Manual config</td>
-              <td>⚠️ Complex filter strings</td>
-              <td>❌ All traffic</td>
-            </tr>
-            <tr>
-              <td><strong>Tokio Async Event Loop</strong></td>
-              <td class="primary-col">✅ High throughput</td>
-              <td>❌ Go goroutines</td>
-              <td>❌ Synchronous queue</td>
-              <td>❌ Java runtime</td>
-            </tr>
-            <tr>
-              <td><strong>TUI Dashboard & CLI Integration</strong></td>
-              <td class="primary-col">✅ Built-in Ratatui TUI</td>
-              <td>❌ API / CLI only</td>
-              <td>❌ GUI only (Win32)</td>
-              <td>❌ Heavy desktop GUI</td>
-            </tr>
-            <tr>
-              <td><strong>License & Cost</strong></td>
-              <td class="primary-col">🟢 100% Free (MIT)</td>
-              <td>🟢 Free (MIT)</td>
-              <td>🟢 Free (MIT)</td>
-              <td>🔴 $50.00 Paid License</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- Quickstart & Installation Section -->
-    <section id="quickstart" class="section">
-      <div class="section-intro">
-        <div class="section-tag">GETTING STARTED</div>
-        <h2 class="section-title">Install in seconds.</h2>
-        <p class="section-subtitle">Start testing your app against chaotic network degradation right away.</p>
-      </div>
-
-      <div class="quickstart-box">
-        <div class="install-tabs">
-          <button class="inst-tab active" data-tab="cargo">Cargo (Rust)</button>
-          <button class="inst-tab" data-tab="binary">Windows Binary</button>
-          <button class="inst-tab" data-tab="cli">Custom Flags</button>
-        </div>
-
-        <div id="tab-cargo" class="terminal-card active">
-          <div class="term-header">
-            <span class="term-tag mono">BASH / POWERSHELL</span>
-            <button class="copy-btn mono" onclick="navigator.clipboard.writeText('cargo install subway-sim')">Copy</button>
-          </div>
-          <pre class="term-code mono"><code><span class="tok-comment"># Install directly via cargo from source</span>
-cargo install --git https://github.com/bhavukar/network-relay.git
-
-<span class="tok-comment"># Start simulating spotty subway network on port 3000 (Run as Admin)</span>
-subway-sim start --port 3000 --profile subway</code></pre>
-        </div>
-
-        <div id="tab-binary" class="terminal-card">
-          <div class="term-header">
-            <span class="term-tag mono">STANDALONE EXECUTABLE</span>
-            <button class="copy-btn mono" onclick="navigator.clipboard.writeText('git clone https://github.com/bhavukar/network-relay.git\ncargo build --release')">Copy</button>
-          </div>
-          <pre class="term-code mono"><code><span class="tok-comment"># Clone and build optimized release binary</span>
-git clone https://github.com/bhavukar/network-relay.git
-cd network-relay
-cargo build --release
-
-<span class="tok-comment"># Run subway-sim</span>
-.\target\release\subway-sim.exe start --port 8080 --profile elevator</code></pre>
-        </div>
-
-        <div id="tab-cli" class="terminal-card">
-          <div class="term-header">
-            <span class="term-tag mono">CLI FLAGS</span>
-            <button class="copy-btn mono" onclick="navigator.clipboard.writeText('subway-sim start --port 8080 --latency 1500 --drop 15')">Copy</button>
-          </div>
-          <pre class="term-code mono"><code><span class="tok-comment"># Fine-tune exact latency and drop rate values</span>
-subway-sim start --port 8080 --latency 1500 --drop 15
-
-<span class="tok-comment"># Options:</span>
-<span class="tok-param">--port &lt;PORT&gt;</span>       Target specific port (default: 8080)
-<span class="tok-param">--profile &lt;NAME&gt;</span>    subway | elevator | mountain | 3g
-<span class="tok-param">--latency &lt;MS&gt;</span>      Custom latency delay in milliseconds
-<span class="tok-param">--drop &lt;PERCENT&gt;</span>    Custom packet drop percentage (0-100)</code></pre>
-        </div>
-      </div>
-    </section>
-
-    <!-- Download Banner -->
-    <section class="section download-section">
-      <div class="download-box">
-        <h2 class="download-title">Make your applications resilient.</h2>
-        <p class="download-desc">Catch network timeouts, race conditions, and retry loop failures before your users do.</p>
-        <div class="download-actions">
-          <a href="https://github.com/bhavukar/network-relay/releases" target="_blank" class="btn btn-primary">Download Latest Release</a>
-          <a href="https://github.com/bhavukar/network-relay" target="_blank" class="btn btn-secondary">Browse Source Code</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-left">
-        <img src="assets/logo.svg" alt="Network Relay Logo" class="footer-logo" />
-        <span>network relay (subway-sim) • 100% Free & Open Source under MIT License</span>
-      </div>
+    <!-- Ultra-Minimal Footer -->
+    <footer class="bottom-footer mono">
+      <span>network-relay (subway-sim) • MIT License</span>
       <div class="footer-links">
-        <a href="https://github.com/bhavukar/network-relay">GitHub</a>
-        <a href="https://github.com/bhavukar/network-relay/issues">Issues</a>
-        <a href="https://github.com/bhavukar/network-relay/blob/master/LICENSE">License</a>
+        <a href="https://github.com/bhavukar/network-relay" target="_blank">GitHub</a>
+        <span class="sep">•</span>
+        <a href="https://github.com/bhavukar/network-relay/releases" target="_blank">Releases</a>
+        <span class="sep">•</span>
+        <a href="https://github.com/bhavukar" target="_blank">@bhavukar</a>
       </div>
-    </div>
-  </footer>
+    </footer>
+
+  </div>
 
   <script type="module" src="app.js"></script>
 </body>
