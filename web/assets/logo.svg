@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="relayBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111116"/>
+      <stop offset="100%" stop-color="#060608"/>
+    </linearGradient>
+    <linearGradient id="neonRelay" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ffcc"/>
+      <stop offset="100%" stop-color="#00aaff"/>
+    </linearGradient>
+    <linearGradient id="glowSheen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Squircle Base -->
+  <rect x="32" y="32" width="448" height="448" rx="112" fill="url(#relayBg)" stroke="rgba(255,255,255,0.12)" stroke-width="8"/>
+  <path d="M36 144 C36 84 84 36 144 36 L368 36 C428 36 476 84 476 144 L476 220 L36 220 Z" fill="url(#glowSheen)"/>
+
+  <!-- Network Topology Hexagon & Relay Route -->
+  <path d="M256 120 L370 186 L370 326 L256 392 L142 326 L142 186 Z" fill="none" stroke="url(#neonRelay)" stroke-width="20" stroke-linejoin="round"/>
+
+  <!-- Packet Interception Nodes -->
+  <circle cx="256" cy="120" r="20" fill="#f7f7f5"/>
+  <circle cx="370" cy="186" r="20" fill="#00ffcc"/>
+  <circle cx="370" cy="326" r="20" fill="#00aaff"/>
+  <circle cx="256" cy="392" r="20" fill="#f7f7f5"/>
+  <circle cx="142" cy="326" r="20" fill="#00ffcc"/>
+  <circle cx="142" cy="186" r="20" fill="#00aaff"/>
+
+  <!-- Center Kernel Pulse / Relay Core -->
+  <circle cx="256" cy="256" r="36" fill="url(#neonRelay)"/>
+  <circle cx="256" cy="256" r="16" fill="#060608"/>
+
+  <!-- Internal Cross Connections -->
+  <line x1="256" y1="140" x2="256" y2="220" stroke="#f7f7f5" stroke-width="12" stroke-linecap="round"/>
+  <line x1="256" y1="292" x2="256" y2="372" stroke="#f7f7f5" stroke-width="12" stroke-linecap="round"/>
+  <line x1="160" y1="196" x2="225" y2="238" stroke="#00aaff" stroke-width="10" stroke-linecap="round"/>
+  <line x1="352" y1="316" x2="287" y2="274" stroke="#00aaff" stroke-width="10" stroke-linecap="round"/>
+</svg>
