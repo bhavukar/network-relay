@@ -950,3 +950,95 @@ body.inf-body.light-theme {
 .footer-links .sep {
   color: #d4d4d8;
 }
+
+/* Comprehensive Responsive Optimization for Phone & Tablet */
+@media (max-width: 768px) {
+  .inf-nav-inner {
+    padding: 0 16px;
+    gap: 12px;
+  }
+  .inf-hero {
+    padding: 48px 20px 36px;
+    gap: 28px;
+  }
+  .inf-section {
+    padding: 48px 20px;
+  }
+  .inf-cta-section {
+    padding: 48px 20px;
+  }
+  .inf-footer {
+    padding: 28px 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  #quick-copy-install {
+    display: none;
+  }
+  .inf-nav-actions .inf-btn-primary {
+    padding: 5px 10px;
+    font-size: 0.76rem;
+  }
+  .inf-github-pill {
+    padding: 4px 8px;
+    font-size: 0.74rem;
+  }
+  .inf-headline {
+    font-size: clamp(1.9rem, 8vw, 2.75rem);
+    line-height: 1.1;
+  }
+  .inf-subtitle {
+    font-size: 0.95rem;
+  }
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+  .hero-cta-group .inf-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 16px;
+  }
+  .scanner-bar {
+    padding: 8px 12px;
+  }
+  .scanner-presets-bar {
+    padding: 8px 12px;
+  }
+  .scanner-preset-btn {
+    padding: 4px 9px;
+    font-size: 0.7rem;
+  }
+  .scanner-telemetry {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 10px 14px;
+  }
+  .scanner-log {
+    margin: 10px 12px;
+    height: 220px;
+    font-size: 0.7rem;
+    padding: 10px;
+  }
+  .scanner-controls-col {
+    padding: 16px 14px;
+  }
+  .inf-grid-col {
+    padding: 24px 18px;
+  }
+  .code-frame-body {
+    padding: 14px;
+    font-size: 0.74rem;
+    overflow-x: auto;
+  }
+  .inf-cta-box {
+    padding: 24px 16px;
+  }
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
